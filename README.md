@@ -2,7 +2,7 @@
 
 ![Build, Scan & Deploy](https://github.com/ydvsailendar/python-gitops/actions/workflows/build-and-bump.yaml/badge.svg)
 ![CodeQL](https://github.com/ydvsailendar/python-gitops/actions/workflows/codeql.yaml/badge.svg)
-![SBOM](https://github.com/ydvsailendar/python-gitops/actions/workflows/build-and-bump.yaml/badge.svg)
+
 
 ## Security & Quality
 
@@ -23,3 +23,80 @@
 - Dependencies are monitored and updated using **GitHub Dependabot**.
 - Updates are proposed via pull requests and validated through CI.
 - Security alerts are visible in the GitHub Security dashboard.
+
+## ARGOCD
+
+- create app namespace
+```bash
+kubectl create namespace argocd
+```
+
+- deploy argocd stack
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+- expose app service
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+- get argocd admin creds
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+## App
+
+- create argocd project for python-gitops
+```bash
+kubectl apply -f k8s/argocd/project.yaml
+```
+
+- deploy python-gitops application
+```bash
+kubectl apply -f k8s/argocd/application.yaml
+```
+
+- create app namespace
+```bash
+kubectl create namespace python-gitops
+```
+
+- expose app service
+```bash
+kubectl port-forward svc/python-gitops -n python-gitops 9090:80
+```
+
+## Monitoring
+
+- add all in one monitoring stack
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
+
+- create namespace for monitoring
+```bash
+kubectl create namespace monitoring
+```
+
+- deploy the stack
+```bash
+helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring
+```
+
+- expose grafana service
+```bash
+kubectl port-forward svc/monitoring-grafana -n monitoring 3000:80
+```
+
+- get grafana admin creds
+```bash
+kubectl get secret monitoring-grafana -n monitoring  -o jsonpath="{.data.admin-password}" | base64 --decode
+```
+
+- expose alertmanager service
+```bash
+kubectl port-forward svc/monitoring-kube-prometheus-alertmanager -n monitoring 9093:9093
+```
