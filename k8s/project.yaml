@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: python-gitops
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/ydvsailendar/python-gitops
+  destinations:
+    - namespace: python-gitops
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: Service
+    - group: "apps"
+      kind: Deployment
