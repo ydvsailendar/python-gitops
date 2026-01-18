@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: python-gitops
   namespace: python-gitops
-specs:
+spec:
   selector:
     app: python-gitops
   ports:

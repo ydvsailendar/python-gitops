@@ -3,7 +3,7 @@ type: Deployment
 metadata:
   name: python-gitops
 	namespace: python-gitops
-specs:
+spec:
   replicas: 1
   selector:
     matchLabels:
@@ -12,7 +12,7 @@ specs:
     metadata:
       labels:
         app: python-gitops
-    specs:
+    spec:
       containers:
         - name: python-gitops
           image: yadavshailendra0905/python-gitops:v1.0.0
