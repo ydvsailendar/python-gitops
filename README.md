@@ -4,7 +4,6 @@
 ![CodeQL](https://github.com/ydvsailendar/python-gitops/actions/workflows/codeql.yaml/badge.svg)
 ![SBOM](https://github.com/ydvsailendar/python-gitops/actions/workflows/build-and-bump.yaml/badge.svg)
 
-
 ## Security & Quality
 
 - **Static code analysis** is performed using GitHub CodeQL for Python.
