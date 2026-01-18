@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: python-gitops
-          image: yadavshailendra0905/python-gitops:v1.0.0
+          image: yadavshailendra0905/python-gitops:v1.1.0
           ports:
             - containerPort: 5000
           resources:
