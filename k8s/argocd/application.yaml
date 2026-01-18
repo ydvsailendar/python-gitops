@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/ydvsailendar/python-gitops
     targetRevision: main
-    path: k8s
+    path: k8s/app
   destination:
     server: https://kubernetes.default.svc
     namespace: python-gitops
