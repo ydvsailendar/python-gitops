@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+type: Deplyment
+metadata:
+  name: python-gitops
+	namespace: python-gitops
+specs:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-gitops
+  template:
+    metadata:
+      labels:
+        app: python-gitops
+    specs:
+      containers:
+        - name: python-gitops
+          image: yadavshailendra0905/python-gitops:v1.0.0
+          ports:
+            - containerPort: 5000
+          resources:
+						requests:
+							cpu: "100m"
+							memory: "128Mi"
+						limits:
+							cpu: "500m"
+							memory: "256Mi"
