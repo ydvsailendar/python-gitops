@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: python-gitops
-          image: yadavshailendra0905/python-gitops:db250f7
+          image: yadavshailendra0905/python-gitops:
           ports:
             - containerPort: 5000
           resources:
